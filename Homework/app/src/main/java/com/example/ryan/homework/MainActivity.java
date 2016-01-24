@@ -3,21 +3,31 @@ package com.example.ryan.homework;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TYPE_A = "a.png";
     private static final String TYPE_B = "b.png";
     private static final String TYPE_C = "c.png";
-    private static final String TYPE_DEFAULT = "default.png";
+    private static final String TYPE_DEFAULT = "default_img.png";
 
     EditText et_name;
     EditText et_price;
     RadioGroup radioGroup; // 타입 라디오 그룹
     RadioButton radioButton; // 선택된 라디오 버튼
+
+    ArrayList<Item> list = new ArrayList<Item>();
+
+    ListView listView;
+    ArrayAdapter<Item> adapter = null;
 
     View.OnClickListener handler = new View.OnClickListener() {
         @Override
@@ -80,5 +90,20 @@ public class MainActivity extends AppCompatActivity {
 
         // 라디오 그룸을 먼저 가져오고 거기서 getCheckedRadioButtonId() 한다.
         radioButton = (RadioButton)findViewById(radioGroup.getCheckedRadioButtonId()); // 라디오 버튼 가져오기 방법
+
+        listView = (ListView)findViewById(R.id.listView);
+        dummyData();
+
+        adapter = new ArrayAdapter<Item>(this, R.layout.list, list);
+        listView.setAdapter(adapter);
+
+
+
+    }
+
+    void dummyData(){
+        list.add(new Item("이름", 1000, R.drawable.icon01));
+        list.add(new Item("이름", 1000, R.drawable.icon02));
+        list.add(new Item("이름", 1000, R.drawable.icon03));
     }
 }
