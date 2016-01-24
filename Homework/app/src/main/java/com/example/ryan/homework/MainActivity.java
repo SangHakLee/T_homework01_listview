@@ -3,6 +3,7 @@ package com.example.ryan.homework;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,24 +50,23 @@ public class MainActivity extends AppCompatActivity {
     int radio_type; // 선탣된 값
 
     void addListBtn(){
-        name = et_name.getText().toString();
-        price = et_price.getText().toString();
-        price_int = Integer.parseInt(price);
-        radio_type = getRadio(radioGroup.getCheckedRadioButtonId());
         LogManager.logPrint(checkIsEditTextValid().toString());
         if(!checkIsEditTextValid()) {
             Toast.makeText(MainActivity.this, "값 넣어주세요", Toast.LENGTH_SHORT).show();
 //            LogManager.logPrint("값 안채워짐");
             return;
+        }else{
+            name = et_name.getText().toString();
+            price = et_price.getText().toString();
+            radio_type = getRadio(radioGroup.getCheckedRadioButtonId());
+            price_int = Integer.parseInt(price);
+            LogManager.logPrint(name +", "+ price + ", " + radio_type);
+
+            // 여기부터 add
+            Item item = new Item(name, price_int, radio_type);
+            list.add(item);
+            adapter.notifyDataSetChanged();
         }
-        LogManager.logPrint(name +", "+ price + ", " + radio_type);
-
-        // 여기부터 add
-        Item item = new Item(name, price_int, radio_type);
-        list.add(item);
-        adapter.notifyDataSetChanged();
-
-
     }
 
     public int getRadio(int RadioButtonId){
@@ -96,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
+    public void selectListItem(){
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,11 +117,10 @@ public class MainActivity extends AppCompatActivity {
         radioButton = (RadioButton)findViewById(radioGroup.getCheckedRadioButtonId()); // 라디오 버튼 가져오기 방법
 
         listView = (ListView)findViewById(R.id.listView);
-        dummyData();
+//        dummyData();
 
         adapter = new Adapter(this, R.layout.list, list);
         listView.setAdapter(adapter);
-
 
 
     }

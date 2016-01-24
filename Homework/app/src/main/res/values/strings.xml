@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Homework</string>
+    <string name="app_name">Homework_이상학</string>
     <string name="tv_name">이름</string>
     <string name="tv_price">가격</string>
     <string name="radio_type_A">A</string>
