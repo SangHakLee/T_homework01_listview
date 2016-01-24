@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Item> list = new ArrayList<Item>();
 
     ListView listView;
-    ArrayAdapter<Item> adapter = null;
+//    ArrayAdapter<Item> adapter = null;
+    Adapter adapter;
 
     View.OnClickListener handler = new View.OnClickListener() {
         @Override
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.listView);
         dummyData();
 
-        adapter = new ArrayAdapter<Item>(this, R.layout.list, list);
+        adapter = new Adapter(this, R.layout.list, list);
         listView.setAdapter(adapter);
 
 
