@@ -4,11 +4,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TYPE_A = "a.png";
+    private static final String TYPE_B = "b.png";
+    private static final String TYPE_C = "c.png";
+    private static final String TYPE_DEFAULT = "default.png";
+
     EditText et_name;
     EditText et_price;
+    RadioGroup radioGroup; // 타입 라디오 그룹
+    RadioButton radioButton; // 선택된 라디오 버튼
 
     View.OnClickListener handler = new View.OnClickListener() {
         @Override
@@ -21,9 +30,42 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    void addListBtn(){
+    String name;
+    String price;
+    int selectedRadio; // 선택된 라디오 Id
+    String radio_type; // 선탣된 값
 
+    void addListBtn(){
+        name = et_name.getText().toString();
+        price = et_price.getText().toString();
+        radio_type = getRadio(radioGroup.getCheckedRadioButtonId());
+
+        LogManager.logPrint(name +", "+ price + ", " + radio_type);
     }
+
+    public String getRadio(int RadioButtonId){
+        String type = TYPE_DEFAULT;
+        switch (RadioButtonId){
+            case R.id.radio_A:
+                type = TYPE_A;
+                break;
+            case R.id.radio_B:
+                type = TYPE_B;
+                break;
+            case R.id.radio_C:
+                type = TYPE_C;
+                break;
+        }
+        return type;
+    };
+
+    public Boolean checkIsEditTextValid(){
+        if( et_name == null || et_name.getText().toString() == ""){
+
+        }
+        return false;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,5 +75,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_add).setOnClickListener(handler);
         et_name = (EditText)findViewById(R.id.et_name);
         et_price = (EditText)findViewById(R.id.et_price);
+
+        radioGroup = (RadioGroup)findViewById(R.id.radio_group_type); //라디오 그룹 가져오기
+
+        // 라디오 그룸을 먼저 가져오고 거기서 getCheckedRadioButtonId() 한다.
+        radioButton = (RadioButton)findViewById(radioGroup.getCheckedRadioButtonId()); // 라디오 버튼 가져오기 방법
     }
 }
