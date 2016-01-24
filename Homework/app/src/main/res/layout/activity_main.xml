@@ -118,14 +118,21 @@
             android:layout_gravity="center_horizontal"
             android:background="#85b1f3" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="수정"
+            android:id="@+id/btn_edit"
+            android:visibility="invisible"
+            android:layout_gravity="center_horizontal" />
+
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#e7e0e0">
+        android:layout_weight="1">
 
         <TextView
             android:layout_width="match_parent"
