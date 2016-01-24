@@ -39,7 +39,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText"
+                android:id="@+id/et_name"
                 android:layout_column="1"
                 android:layout_weight="1" />
         </LinearLayout>
@@ -59,7 +59,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText2"
+                android:id="@+id/et_price"
                 android:layout_column="1"
                 android:layout_weight="1" />
         </LinearLayout>
@@ -79,13 +79,14 @@
 
             <RadioGroup
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/radio_group_type">
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/radio_type_A"
-                    android:id="@+id/radioButton"
+                    android:id="@+id/radio_A"
                     android:layout_column="1"
                     android:checked="false" />
 
@@ -93,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/radio_type_B"
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/radio_B"
                     android:layout_column="1"
                     android:checked="false" />
 
@@ -101,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/radio_type_C"
-                    android:id="@+id/radioButton3"
+                    android:id="@+id/radio_C"
                     android:layout_column="1"
                     android:checked="false" />
             </RadioGroup>
@@ -111,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_add"
-            android:id="@+id/button"
+            android:id="@+id/btn_add"
             android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
@@ -129,6 +130,12 @@
             android:text="리스트"
             android:id="@+id/textView2"
             android:layout_gravity="center_horizontal" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView"
+            android:layout_weight="1" />
     </LinearLayout>
 
 </LinearLayout>
