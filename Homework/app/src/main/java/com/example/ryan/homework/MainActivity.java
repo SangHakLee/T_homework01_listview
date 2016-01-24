@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.btn_edit :
                     editListBtn();
                     break;
+                case R.id.btn_clear :
+                    clearListBtn();
+                    break;
             }
         }
     };
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 //    int selectedRadio; // 선택된 라디오 Id
     int radio_type; // 선탣된 값
 
-    void addListBtn(){
+    public void addListBtn(){
         LogManager.logPrint(checkIsEditTextValid().toString());
         if(!checkIsEditTextValid()) {
             Toast.makeText(MainActivity.this, "값 넣어주세요", Toast.LENGTH_SHORT).show();
@@ -103,9 +106,11 @@ public class MainActivity extends AppCompatActivity {
     // 추가하는 값 유효성 검사
     public Boolean checkIsEditTextValid(){ // 에딧 텍스트 입력갑 확인
         if( et_name.getText().toString().getBytes().length <= 0 ){
+            et_name.requestFocus();
 //            LogManager.logPrint("이름 없음");
             return false;
         }else if( et_price.getText().toString().getBytes().length <= 0 ){
+            et_name.requestFocus();
 //            LogManager.logPrint("가격 없음");
             return false;
         }
@@ -114,15 +119,27 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private int nowListPosition = -1;
-
-    void editListBtn(){
-        LogManager.logPrint(" " + nowListPosition);
-        if( nowListPosition < 0){
+    public void editListBtn(){
+        if( list.size() == 0 || nowListPosition < 0 ){ // 에러 방지
             Toast.makeText(this, "수정할 리스트를 먼저 클릭해주세요.", Toast.LENGTH_SHORT).show();
         }else{
-            list.set(nowListPosition, addItem());
+            if(!checkIsEditTextValid()) {
+                Toast.makeText(MainActivity.this, "값 넣어주세요", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            list.set(nowListPosition, addItem()); // set 이 변경
             adapter.notifyDataSetChanged(); // UI 변경 알리기
             listView.smoothScrollToPosition(adapter.getCount()-1); // 추가하고 해당 위치로
+        }
+    }
+
+    public void clearListBtn(){
+        if( list.size() < 1){
+            Toast.makeText(this, "이미 리스트가 비어있습니다.", Toast.LENGTH_SHORT).show();
+        }else{
+            list.clear();
+            nowListPosition = -1;
+            adapter.notifyDataSetChanged(); // UI 변경 알리기
         }
     }
 
@@ -134,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_add).setOnClickListener(handler);
         findViewById(R.id.btn_edit).setOnClickListener(handler);
+        findViewById(R.id.btn_clear).setOnClickListener(handler);
+
         et_name = (EditText)findViewById(R.id.et_name);
         et_price = (EditText)findViewById(R.id.et_price);
 

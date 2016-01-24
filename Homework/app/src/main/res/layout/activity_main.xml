@@ -121,6 +121,13 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="리스트 전체삭제"
+            android:id="@+id/btn_clear"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="수정"
             android:id="@+id/btn_edit"
             android:visibility="invisible"
