@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Homework</string>
+    <string name="tv_name">이름</string>
+    <string name="tv_price">가격</string>
+    <string name="radio_type_A">A</string>
+    <string name="radio_type_B">B</string>
+    <string name="radio_type_C">C</string>
+
+    <string name="btn_add">추가</string>
+
+</resources>
