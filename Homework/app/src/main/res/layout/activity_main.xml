@@ -61,7 +61,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/et_price"
                 android:layout_column="1"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout

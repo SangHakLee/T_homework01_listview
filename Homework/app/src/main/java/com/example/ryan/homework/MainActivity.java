@@ -15,10 +15,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TYPE_A = "a.png";
-    private static final String TYPE_B = "b.png";
-    private static final String TYPE_C = "c.png";
-    private static final String TYPE_DEFAULT = "default_img.png";
+    private static final int TYPE_A = R.drawable.icon01;
+    private static final int TYPE_B = R.drawable.icon02;
+    private static final int TYPE_C = R.drawable.icon03;
 
     EditText et_name;
     EditText et_price;
@@ -44,26 +43,33 @@ public class MainActivity extends AppCompatActivity {
 
     String name;
     String price;
+    int price_int;
     int selectedRadio; // 선택된 라디오 Id
-    String radio_type; // 선탣된 값
+    int radio_type; // 선탣된 값
 
     void addListBtn(){
         name = et_name.getText().toString();
         price = et_price.getText().toString();
+        price_int = Integer.parseInt(price);
         radio_type = getRadio(radioGroup.getCheckedRadioButtonId());
         LogManager.logPrint(checkIsEditTextValid().toString());
         if(!checkIsEditTextValid()) {
             Toast.makeText(MainActivity.this, "값 넣어주세요", Toast.LENGTH_SHORT).show();
-            LogManager.logPrint("값 안채워짐");
+//            LogManager.logPrint("값 안채워짐");
             return;
-        }else{
-            LogManager.logPrint("값 채워짐");
         }
         LogManager.logPrint(name +", "+ price + ", " + radio_type);
+
+        // 여기부터 add
+        Item item = new Item(name, price_int, radio_type);
+        list.add(item);
+        adapter.notifyDataSetChanged();
+
+
     }
 
-    public String getRadio(int RadioButtonId){
-        String type = TYPE_DEFAULT;
+    public int getRadio(int RadioButtonId){
+        int type = TYPE_A;
         switch (RadioButtonId){
             case R.id.radio_A:
                 type = TYPE_A;
