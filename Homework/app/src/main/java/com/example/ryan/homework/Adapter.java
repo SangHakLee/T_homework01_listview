@@ -49,6 +49,7 @@ public class Adapter extends BaseAdapter {
 
         tv_name.setText(item.name);
         tv_price.setText(item.price+"");
+        imageView.setImageResource(item.type);
         return view;
     }
 }
