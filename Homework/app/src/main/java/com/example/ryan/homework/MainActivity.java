@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -50,7 +51,14 @@ public class MainActivity extends AppCompatActivity {
         name = et_name.getText().toString();
         price = et_price.getText().toString();
         radio_type = getRadio(radioGroup.getCheckedRadioButtonId());
-
+        LogManager.logPrint(checkIsEditTextValid().toString());
+        if(!checkIsEditTextValid()) {
+            Toast.makeText(MainActivity.this, "값 넣어주세요", Toast.LENGTH_SHORT).show();
+            LogManager.logPrint("값 안채워짐");
+            return;
+        }else{
+            LogManager.logPrint("값 채워짐");
+        }
         LogManager.logPrint(name +", "+ price + ", " + radio_type);
     }
 
@@ -70,12 +78,17 @@ public class MainActivity extends AppCompatActivity {
         return type;
     };
 
-    public Boolean checkIsEditTextValid(){
-        if( et_name == null || et_name.getText().toString() == ""){
-
+    public Boolean checkIsEditTextValid(){ // 에딧 텍스트 입력갑 확인
+        if( et_name.getText().toString().getBytes().length <= 0 ){
+//            LogManager.logPrint("이름 없음");
+            return false;
+        }else if( et_price.getText().toString().getBytes().length <= 0 ){
+//            LogManager.logPrint("가격 없음");
+            return false;
         }
-        return false;
-    }
+        return true;
+
+    };
 
 
     @Override
