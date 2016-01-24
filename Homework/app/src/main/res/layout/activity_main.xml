@@ -16,12 +16,13 @@
         android:layout_weight="1">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="상세보기"
             android:id="@+id/textView"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -114,7 +115,8 @@
             android:layout_height="wrap_content"
             android:text="@string/btn_add"
             android:id="@+id/btn_add"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:background="#85b1f3" />
 
     </LinearLayout>
 
@@ -122,15 +124,18 @@
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="#e7e0e0">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="리스트"
             android:id="@+id/textView2"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:background="#ffffff" />
 
         <ListView
             android:layout_width="match_parent"
@@ -138,7 +143,9 @@
             android:id="@+id/listView"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:layout_weight="1" />
+            android:listSelector="#FFC7C4C4"
+            android:layout_weight="1"
+            android:background="#ffffff" />
     </LinearLayout>
 
 </LinearLayout>

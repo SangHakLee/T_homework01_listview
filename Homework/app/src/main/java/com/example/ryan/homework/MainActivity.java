@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 et_name.setText(list.get(position).name);
                 et_price.setText(list.get(position).price + "");
+
 //                LogManager.logPrint("aaaa");
             }
         });
