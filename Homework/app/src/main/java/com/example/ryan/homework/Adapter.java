@@ -20,6 +20,7 @@ import java.util.jar.Manifest;
  */
 public class Adapter extends BaseAdapter {
 
+    MainActivity mainActivity;
     int layout;
     ArrayList<Item> data;
     Context context;
@@ -57,7 +58,7 @@ public class Adapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         ViewHolder holder = null; // 한번 찾아서 넣어줄 객체
 
         if(convertView == null){
@@ -86,17 +87,17 @@ public class Adapter extends BaseAdapter {
         holder.tv_price.setText(item.price + "");
         holder.imageView.setImageResource(item.type);
 
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, item.name, Toast.LENGTH_SHORT).show();
-//                et_name = (EditText)v.findViewById(R.id.et_name);
-//                LogManager.logPrint(et_name.toString());
+//        convertView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(context, item.name, Toast.LENGTH_SHORT).show();
+//                et_name = (EditText)parent.findViewById(R.id.et_name);
+//                LogManager.logPrint(et_name+"");
 //                et_name.setText("aa");
-            }
-
-
-        });
+//            }
+//
+//
+//        });
 
 
 

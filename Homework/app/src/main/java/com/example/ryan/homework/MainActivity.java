@@ -65,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
             // 여기부터 add
             Item item = new Item(name, price_int, radio_type);
             list.add(item);
-            adapter.notifyDataSetChanged();
+            adapter.notifyDataSetChanged(); // UI 변경 알리기
+
+            listView.smoothScrollToPosition(adapter.getCount()-1); // 추가하고 해당 위치로
         }
     }
 
@@ -117,17 +119,29 @@ public class MainActivity extends AppCompatActivity {
         radioButton = (RadioButton)findViewById(radioGroup.getCheckedRadioButtonId()); // 라디오 버튼 가져오기 방법
 
         listView = (ListView)findViewById(R.id.listView);
-//        dummyData();
+        dummyData();
 
         adapter = new Adapter(this, R.layout.list, list);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                et_name.setText(list.get(position).name);
+                et_price.setText(list.get(position).price + "");
+//                LogManager.logPrint("aaaa");
+            }
+        });
+
         listView.setAdapter(adapter);
+
+
 
 
     }
 
     void dummyData(){
-        list.add(new Item("이름", 1000, R.drawable.icon01));
-        list.add(new Item("이름", 1000, R.drawable.icon02));
-        list.add(new Item("이름", 1000, R.drawable.icon03));
+        list.add(new Item("이름1", 1000, R.drawable.icon01));
+        list.add(new Item("이름2", 2000, R.drawable.icon02));
+        list.add(new Item("이름3", 3000, R.drawable.icon03));
     }
 }
