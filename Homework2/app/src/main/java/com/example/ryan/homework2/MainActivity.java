@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -18,8 +19,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "Main";
+
+    ListView listView;
+    WeatherAdapter adapter;
+    ArrayList<WeatherItem> data = new ArrayList<WeatherItem>();
+
 
     class WeatherTask extends AsyncTask<String, Void, WeatherItem > {
         @Override
@@ -57,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
             } catch (IOException e) {
 //            e.printStackTrace();
-//                Log.v(TAG, "error : " + e);
+                Log.v(TAG, "error : " + e);
             }
             return weather; // onPostExecute() 로 데이터 이동
         }
@@ -65,8 +73,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(WeatherItem weather) {
 //            et.setText(weather.toString()); // HttpTask 에서 return 값
+            Log.v(TAG, "weather.toString() : " + weather.toString());
 //            super.onPostExecute(weather);
         }
+    }
+
+    public void addWeatherData(WeatherItem weather){
+//        for(WeatherItem weatherItem : s){
+//
+//        }
     }
 
     @Override
@@ -75,6 +90,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        listView = (ListView)findViewById(R.id.listView);
+        adapter = new WeatherAdapter(this, R.layout.item, data);
+
+        new WeatherTask().execute("http://www.kma.go.kr/XML/weather/sfc_web_map.xml");
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
