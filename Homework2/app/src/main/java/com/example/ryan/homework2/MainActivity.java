@@ -73,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(WeatherItem weather) {
 //            et.setText(weather.toString()); // HttpTask 에서 return 값
-            Log.v(TAG, "weather.toString() : " + weather.toString());
+//            Log.v(TAG, "weather.toString() : " + weather.toString());
+            Log.v(TAG, "weather : " + weather.list);
+            addWeatherData(weather);
 //            super.onPostExecute(weather);
         }
     }
@@ -82,6 +84,13 @@ public class MainActivity extends AppCompatActivity {
 //        for(WeatherItem weatherItem : s){
 //
 //        }
+        data.add(new WeatherItem(weather.year, weather.month, weather.day, weather.hour, weather.list));
+        listView = (ListView)findViewById(R.id.listView);
+        Log.v(TAG, "datadatadata : " +data);
+
+        adapter = new WeatherAdapter(this, R.layout.item, data);
+        listView.setAdapter(adapter);
+
     }
 
     @Override
@@ -91,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        listView = (ListView)findViewById(R.id.listView);
-        adapter = new WeatherAdapter(this, R.layout.item, data);
+//        listView = (ListView)findViewById(R.id.listView);
+//        adapter = new WeatherAdapter(this, R.layout.item, data);
 
         new WeatherTask().execute("http://www.kma.go.kr/XML/weather/sfc_web_map.xml");
 

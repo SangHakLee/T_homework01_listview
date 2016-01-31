@@ -13,6 +13,17 @@ public class WeatherItem {
 
     ArrayList<WeatherXmlItem> list = new ArrayList<WeatherXmlItem>();
 
+    public WeatherItem() {
+    }
+
+    public WeatherItem(String year, String month, String day, String hour, ArrayList<WeatherXmlItem> list) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.list = list;
+    }
+
     @Override
     public String toString() {
         return "Weather{" +
