@@ -20,11 +20,11 @@ public class WeatherAdapter extends BaseAdapter{
     private static final String TAG = "Main";
 
     int layout; // 뷰가 필요해서
-    ArrayList<WeatherItem> data; // 데이터 필요
+    ArrayList<WeatherXmlItem> data; // 데이터 필요
     Context context; // context도 필요하다. 여기선 없기 때문에
 
     // 생성자 필요
-    public WeatherAdapter(Context context, int layout, ArrayList<WeatherItem> data ) {
+    public WeatherAdapter(Context context, int layout, ArrayList<WeatherXmlItem> data ) {
         this.context = context;
         this.layout = layout;
         this.data = data;
@@ -54,7 +54,6 @@ public class WeatherAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.v(TAG, "position : " + position);
 
         ViewHolder holder = null;
 
@@ -69,11 +68,11 @@ public class WeatherAdapter extends BaseAdapter{
             holder = (ViewHolder)convertView.getTag();
         }
 
-        final WeatherItem weatherItem = data.get(position);
+        final WeatherXmlItem weatherItem = data.get(position);
 
 
-        holder.tv_weather.setText(weatherItem.list.get(0).desc);
-        holder.tv_location.setText(weatherItem.list.get(0).locationName);
+        holder.tv_weather.setText(weatherItem.desc);
+        holder.tv_location.setText(weatherItem.stn_id);
 
         return convertView;
     }

@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     WeatherAdapter adapter;
     ArrayList<WeatherItem> data = new ArrayList<WeatherItem>();
+    ArrayList<WeatherXmlItem> dataWeather = new ArrayList<WeatherXmlItem>();
 
 
     class WeatherTask extends AsyncTask<String, Void, WeatherItem > {
@@ -84,11 +85,16 @@ public class MainActivity extends AppCompatActivity {
 //        for(WeatherItem weatherItem : s){
 //
 //        }
-        data.add(new WeatherItem(weather.year, weather.month, weather.day, weather.hour, weather.list));
+        for(int i=0; i<weather.list.size(); i++){
+            WeatherXmlItem item = weather.list.get(i);
+            dataWeather.add(new WeatherXmlItem(item.stn_id, item.icon, item.desc, item.ta
+            , item.rn_hr1, item.locationName));
+        }
+//        data.add(new WeatherItem(weather.list.get(0). .year, weather.month, weather.day, weather.hour, weather.list));
         listView = (ListView)findViewById(R.id.listView);
-        Log.v(TAG, "datadatadata : " +data);
+        Log.v(TAG, "dataWeather : " +dataWeather.get(0));
 
-        adapter = new WeatherAdapter(this, R.layout.item, data);
+        adapter = new WeatherAdapter(this, R.layout.item, dataWeather);
         listView.setAdapter(adapter);
 
     }
