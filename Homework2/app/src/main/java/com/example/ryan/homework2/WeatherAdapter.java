@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -49,6 +51,24 @@ public class WeatherAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        ViewHolder holder = null;
+
+        if(convertView == null){
+            convertView = View.inflate(context, layout, null);
+            holder = new ViewHolder();
+            holder.tv_weather = (TextView)convertView.findViewById(R.id.tv_weather);
+            holder.tv_location = (TextView)convertView.findViewById(R.id.tv_location);
+
+            convertView.setTag(holder);
+        }else{
+            holder = (ViewHolder)convertView.getTag();
+        }
+
+        final WeatherItem weatherItem = data.get(position);
+
+        holder.tv_weather.setText(weatherItem.list.get(position).desc);
+        holder.tv_location.setText(weatherItem.list.get(position).locationName);
+
+        return convertView;
     }
 }
